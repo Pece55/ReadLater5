@@ -1,0 +1,64 @@
+﻿@model LoginModel
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <section>
+                <form id="account" method="post">
+                    <h4 class="text-dark">Log In</h4>
+                    <hr />
+                    @if (Model.WrongCredentials)
+                    {
+        <span class="text-danger">Wrong username or password</span>}
+                    <div class="form-group">
+                        <label asp-for="Username" class="text-dark"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-info"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="text-dark"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-info"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" asp-action="Authenticate">Log in</button>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <a asp-action="Register" asp-controller="User">Register as a new user</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <div class="col-md-6">
+            <h4>External login</h4>
+            <hr />
+            @{
+               @if (!Model.ExternalLogins.Any())
+                {
+                    <div>No external login providers</div> }
+                else
+                {
+                    <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div>
+                    @foreach (var provider in Model.ExternalLogins)
+                    {
+                     <button type="submit"
+                     class="btn btn-primary"
+                     name="provider"
+                     value="@provider.Name"
+                     title="Login using your @provider.DisplayName acc">
+                     @provider.DisplayName
+                    </button>
+                    }
+                    </div>
+                </form>
+                } 
+              }
+        </div>
+
+    </div>
+</div>

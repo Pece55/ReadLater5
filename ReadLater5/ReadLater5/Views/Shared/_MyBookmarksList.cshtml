@@ -1,0 +1,45 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Url
+            </th>
+            <th>
+                Short description
+            </th>
+            <th>
+                Category name
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr id="@ViewBag.Page-@item.ID">
+            <td>
+                @item.URL
+            </td>
+            <td>
+                @item.ShortDescription
+            </td>
+            <td>
+                @item.CategoryName
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+                @if (ViewBag.Page == "MyBookmarks")
+                {
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

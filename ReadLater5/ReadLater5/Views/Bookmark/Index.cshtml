@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BookmarkModel>
+
+
+@if (Model.Any())
+{
+<h1>@Model.First().CategoryName</h1> }
+            else
+            {
+<h1>No Bookmarks</h1>}
+
+<partial name="_MyBookmarksList" for="@Model" />
+
+<div>
+    <a asp-action="Index" asp-controller="Categories">Back to categories</a>
+</div>
